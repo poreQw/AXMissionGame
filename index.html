@@ -26,7 +26,7 @@
     * { box-sizing: border-box; }
 
     body {
-      min-width: 320px;
+      min-width: 0;
       min-height: 100vh;
       margin: 0;
       color: var(--text);
@@ -54,6 +54,14 @@
     }
     .brand small { color: var(--muted); font-size: 10px; font-weight: 650; letter-spacing: .09em; }
     .top-note { color: var(--muted); font-size: 12px; }
+    .page-nav { display: flex; gap: 8px; }
+    .nav-link {
+      min-height: 40px; padding: 0 14px; border: 1px solid transparent;
+      border-radius: 10px; color: var(--muted); background: transparent;
+      font-size: 12px; font-weight: 750; cursor: pointer;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--lime); border-color: var(--line); background: var(--panel); }
+    .nav-link:focus-visible { outline: 3px solid #76a8e8; outline-offset: 3px; }
 
     main { padding: 64px 0 52px; }
     .eyebrow {
@@ -177,11 +185,27 @@
     .storage-notice { margin-top: 8px; color: var(--red); font-size: 10px; line-height: 1.5; }
     .result-actions { display: flex; gap: 9px; }
     .result-badge { margin-bottom: 11px; color: var(--lime); font-size: 11px; font-weight: 850; letter-spacing: .15em; }
+    .about-page { padding: 38px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); box-shadow: 0 12px 34px rgba(34,70,111,.07); }
+    .about-page h2 { margin: 10px 0 8px; font-size: clamp(26px, 4vw, 38px); }
+    .about-lead { max-width: 720px; margin: 0 0 28px; color: #526a81; line-height: 1.8; }
+    .about-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .about-card { padding: 20px; border: 1px solid var(--line); border-radius: 15px; background: var(--panel-raised); }
+    .about-card h3 { margin: 0 0 9px; font-size: 15px; }
+    .about-card p, .about-card li { color: #526a81; font-size: 13px; line-height: 1.75; }
+    .about-card p { margin: 0; }
+    .about-card ul { margin: 0; padding-left: 19px; }
+    .screenshot-placeholder {
+      min-height: 124px; display: grid; place-items: center; padding: 14px;
+      border: 1px dashed #9bb5d0; border-radius: 11px; color: var(--muted);
+      background: #edf3fa; text-align: center; font-size: 12px; line-height: 1.7;
+    }
+    .screenshot-placeholder + .screenshot-placeholder { margin-top: 10px; }
 
     @media (max-width: 760px) {
       .app { width: min(100% - 32px, 560px); }
       .topbar { height: 68px; }
       .top-note { font-size: 10px; }
+      .nav-link { min-height: 38px; padding: 0 10px; font-size: 11px; }
       main { padding-top: 42px; }
       .hero { grid-template-columns: 1fr; gap: 16px; margin-bottom: 26px; }
       .edition { display: none; }
@@ -196,6 +220,8 @@
       .stat-label { display: block; margin-bottom: 6px; font-size: 10px; }
       .stat-value { font-size: 15px; }
       .result-stats { grid-template-columns: repeat(2, 1fr); }
+      .about-page { padding: 24px 20px; }
+      .about-grid { grid-template-columns: 1fr; }
       .mission-tip { margin-top: 18px; }
       .footer-note { padding-bottom: 15px; }
     }
@@ -217,6 +243,7 @@
       .result-actions { width: 100%; flex-direction: column; }
       .result-actions .primary-btn, .result-actions .secondary-btn { width: 100%; }
       .top-note { display: none; }
+      .nav-link { min-height: 36px; padding: 0 9px; font-size: 10px; }
       main { padding: 30px 0 34px; }
       .topbar { height: 62px; }
       .game-card { padding: 21px 16px; }
@@ -238,10 +265,15 @@
   <div class="app">
     <header class="topbar">
       <div class="brand"><span class="brand-mark">A</span><span>AX MISSION <small> / FIELD TRAINING</small></span></div>
+      <nav class="page-nav" aria-label="页面导航">
+        <button id="home-nav" class="nav-link active" type="button" aria-current="page">开始游戏</button>
+        <button id="about-nav" class="nav-link" type="button">项目介绍</button>
+      </nav>
       <div class="top-note">AI × IT KNOWLEDGE QUEST</div>
     </header>
 
     <main>
+      <div id="home-page">
       <section class="hero" aria-label="게임 소개">
         <div>
           <div class="eyebrow">YOUR NEXT MISSION STARTS HERE</div>
@@ -316,11 +348,61 @@
         </aside>
       </div>
       <div class="footer-note">AX MISSION · 용어 출처: <a href="https://drplan.kr/AX_Study/AXTERM.html" target="_blank" rel="noopener noreferrer" style="color:inherit">BNC AX Junior Lab · 30일 IT 용어 마스터</a></div>
+      </div>
+
+      <section id="about-page" class="about-page hidden" aria-labelledby="about-title">
+        <div class="eyebrow">ABOUT THIS PROJECT</div>
+        <h2 id="about-title">项目介绍</h2>
+        <p class="about-lead">AX Mission 是一款帮助学习者认识人工智能与信息技术词汇的三语问答小游戏。通过随机题目和即时反馈，轻松练习中文、英文与韩文术语。</p>
+        <div class="about-grid">
+          <article class="about-card">
+            <h3>项目目的</h3>
+            <p>用简短、有互动感的游戏方式学习 AI 与 IT 术语，帮助玩家建立三种语言之间的词汇联系。</p>
+          </article>
+          <article class="about-card">
+            <h3>适用对象</h3>
+            <p>适合对人工智能感兴趣的初学者、学习中文/英文/韩文的学生，以及希望轻松复习技术词汇的用户。</p>
+          </article>
+          <article class="about-card">
+            <h3>游戏规则</h3>
+            <ul>
+              <li>每轮从题库随机抽取 10 道不重复的题目。</li>
+              <li>每题有 4 个选项，限时 20 秒，每题只能作答一次。</li>
+              <li>答对得 10 分，答错或超时得 0 分，满分 100 分。</li>
+            </ul>
+          </article>
+          <article class="about-card">
+            <h3>主要功能</h3>
+            <ul>
+              <li>三语词汇练习、拼音辅助、即时正误反馈与答案回顾。</li>
+              <li>答题进度、得分、正确题数与连续答对纪录。</li>
+              <li>重新开始、响应式布局与浏览器最高分保存。</li>
+            </ul>
+          </article>
+          <article class="about-card">
+            <h3>开发技术</h3>
+            <p>使用 HTML 搭建页面结构、CSS 实现视觉样式和响应式布局，使用原生 JavaScript 实现题库抽题、计时、计分和交互；使用 LocalStorage 保存最高分。无需安装依赖。</p>
+          </article>
+          <article class="about-card">
+            <h3>开发中遇到的问题</h3>
+            <p>需要保证随机抽题与选项均不重复、选项只有一个正确答案，并妥善处理超时和重复点击；同时还要兼顾不同屏幕尺寸与本地成绩保存。</p>
+          </article>
+          <article class="about-card">
+            <h3>学到的知识</h3>
+            <p>练习了用 JavaScript 管理游戏状态、打乱数组、控制计时器、更新 DOM、进行本地存储，以及使用 CSS Grid 和媒体查询构建移动端界面。</p>
+          </article>
+          <article class="about-card">
+            <h3>界面截图占位</h3>
+            <div class="screenshot-placeholder">开始页 / 答题页截图<br>在此插入项目运行截图</div>
+            <div class="screenshot-placeholder">结果页 / 项目介绍页截图<br>在此插入项目运行截图</div>
+          </article>
+        </div>
+      </section>
     </main>
   </div>
 
   <script>
-    const questions = [
+    const vocabulary = [
       { day: "DAY 08 · AI와 대화할 때", ko: "인공지능", zh: "人工智能", py: "Ren Gong Zhi Neng", en: "Artificial Intelligence (AI)", meaning: "사람의 지능적인 일을 컴퓨터가 수행하도록 하는 기술" },
       { day: "DAY 08 · AI와 대화할 때", ko: "생성형 AI", zh: "生成式人工智能", py: "Sheng Cheng Shi Ren Gong Zhi Neng", en: "Generative AI", meaning: "글·그림·코드 등 새로운 콘텐츠를 만드는 AI" },
       { day: "DAY 08 · AI와 대화할 때", ko: "대규모 언어 모델", zh: "大语言模型", py: "Da Yu Yan Mo Xing", en: "Large Language Model (LLM)", meaning: "많은 글을 학습해 문장을 이해하고 생성하는 AI" },
@@ -390,13 +472,42 @@
       { day: "DAY 28 · AI 검색과 에이전트", ko: "자동화", zh: "自动化", py: "Zi Dong Hua", en: "Automation", meaning: "사람이 반복하던 일을 프로그램이 대신 처리하는 것" }
     ];
 
+    const questions = vocabulary.map((term, index, terms) => {
+      const answerIndex = index % 4;
+      const optionIndexes = [];
+      for (let offset = 1; optionIndexes.length < 3; offset += 1) {
+        const candidate = (index + offset) % terms.length;
+        if (candidate !== index && !optionIndexes.includes(candidate)) optionIndexes.push(candidate);
+      }
+      optionIndexes.splice(answerIndex, 0, index);
+      return {
+        id: index + 1,
+        questionZh: `请选择与「${term.zh}」对应的英文或韩文术语。`,
+        questionKo: `「${term.ko}」에 해당하는 영어 또는 중국어 용어를 고르세요.`,
+        correctEn: term.en,
+        correctKo: term.ko,
+        correctZh: term.zh,
+        options: optionIndexes.map(optionIndex => ({
+          en: terms[optionIndex].en,
+          ko: terms[optionIndex].ko,
+          zh: terms[optionIndex].zh,
+          py: terms[optionIndex].py
+        })),
+        answerIndex,
+        day: term.day,
+        py: term.py,
+        meaning: term.meaning
+      };
+    });
+
     const letters = ["A", "B", "C", "D"];
     const ROUND_SIZE = 10;
     const BEST_SCORE_KEY = "axMissionBestScore";
+    const termFields = { en: "correctEn", ko: "correctKo", zh: "correctZh" };
     const languagePairs = [
-      { source: "zh", target: "ko", prompt: "중국어와 병음을 보고 한국어 뜻을 고르세요." },
-      { source: "ko", target: "en", prompt: "한국어 용어에 맞는 영어 표현을 고르세요." },
-      { source: "en", target: "zh", prompt: "영어 용어에 맞는 중국어 표현을 고르세요." }
+      { source: "zh", target: "ko", promptKey: "questionKo" },
+      { source: "ko", target: "en", promptKey: "questionKo" },
+      { source: "en", target: "zh", promptKey: "questionZh" }
     ];
     let order = [];
     let current = 0;
@@ -468,22 +579,18 @@
       const questionIndex = order[current];
       const question = questions[questionIndex];
       const pair = languagePairs[current % languagePairs.length];
-      const optionIndexes = [questionIndex];
-      while (optionIndexes.length < 4) {
-        const candidate = Math.floor(Math.random() * questions.length);
-        if (!optionIndexes.includes(candidate)) optionIndexes.push(candidate);
-      }
-      for (let index = optionIndexes.length - 1; index > 0; index -= 1) {
+      const displayedOptions = question.options.map((option, index) => ({ option, originalIndex: index }));
+      for (let index = displayedOptions.length - 1; index > 0; index -= 1) {
         const swapIndex = Math.floor(Math.random() * (index + 1));
-        [optionIndexes[index], optionIndexes[swapIndex]] = [optionIndexes[swapIndex], optionIndexes[index]];
+        [displayedOptions[index], displayedOptions[swapIndex]] = [displayedOptions[swapIndex], displayedOptions[index]];
       }
-      const correctAnswer = optionIndexes.indexOf(questionIndex);
+      const correctAnswer = displayedOptions.findIndex(item => item.originalIndex === question.answerIndex);
       document.getElementById("question-number").textContent = String(current + 1).padStart(2, "0");
       document.getElementById("question-tag").textContent = question.day;
-      document.getElementById("question-text").textContent = pair.prompt;
+      document.getElementById("question-text").textContent = question[pair.promptKey];
       const sourceTerm = document.getElementById("source-term");
       sourceTerm.lang = pair.source;
-      sourceTerm.innerHTML = `<span>${question[pair.source]}</span>${pair.source === "zh" ? `<span class="source-pinyin">${question.py}</span>` : ""}`;
+      sourceTerm.innerHTML = `<span>${question[termFields[pair.source]]}</span>${pair.source === "zh" ? `<span class="source-pinyin">${question.py}</span>` : ""}`;
       progressTrack.setAttribute("aria-valuenow", String(current));
       document.getElementById("progress-fill").style.width = `${current / ROUND_SIZE * 100}%`;
       feedbackEl.className = "feedback";
@@ -492,28 +599,27 @@
       document.getElementById("answer-hint").textContent = "가장 알맞은 답을 선택하세요";
       optionsEl.replaceChildren();
 
-      optionIndexes.forEach((optionIndex, index) => {
+      displayedOptions.forEach(({ option }, index) => {
         const button = document.createElement("button");
         button.className = "option";
         button.type = "button";
-        const optionTerm = questions[optionIndex];
         button.innerHTML = `<span class="option-key">${letters[index]}</span><span class="option-copy"></span>`;
         const copy = button.lastElementChild;
         copy.lang = pair.target;
         copy.textContent = "";
         const label = document.createElement("span");
-        label.textContent = optionTerm[pair.target];
+        label.textContent = option[pair.target];
         copy.append(label);
         if (pair.target === "zh") {
           const pinyin = document.createElement("span");
           pinyin.className = "option-pinyin";
-          pinyin.textContent = optionTerm.py;
+          pinyin.textContent = option.py;
           copy.append(pinyin);
         }
         button.addEventListener("click", () => selectAnswer(index, false));
         optionsEl.append(button);
       });
-      question.roundData = { pair, optionIndexes, correctAnswer };
+      question.roundData = { pair, options: displayedOptions.map(item => item.option), correctAnswer };
 
       secondsLeft = 20;
       updateTimer();
@@ -535,11 +641,11 @@
       answered = true;
       clearInterval(timerId);
       const question = questions[order[current]];
-      const { pair, optionIndexes, correctAnswer } = question.roundData;
+      const { pair, options, correctAnswer } = question.roundData;
       const correct = selected === correctAnswer;
-      answerHistory[current] = { questionIndex: order[current], selected, correct, pair, optionIndexes, correctAnswer };
+      answerHistory[current] = { questionIndex: order[current], selected, correct, pair, options, correctAnswer };
       if (correct) {
-        score += 100 + secondsLeft * 5;
+        score += 10;
         streak += 1;
         bestStreak = Math.max(bestStreak, streak);
       } else {
@@ -552,13 +658,13 @@
         if (index === selected && !correct) button.classList.add("incorrect");
       });
       feedbackEl.classList.add("visible");
-      const correctTerm = questions[optionIndexes[correctAnswer]];
+      const correctTerm = options[correctAnswer];
       const opening = timedOut
         ? `<strong>시간 초과!</strong> 정답은 ${letters[correctAnswer]} · ${correctTerm[pair.target]}예요. `
         : correct
           ? "<strong>정답이에요!</strong> 정확하게 알고 있네요. "
           : `<strong>아쉬워요!</strong> 정답은 ${letters[correctAnswer]} · ${correctTerm[pair.target]}예요. `;
-      feedbackEl.innerHTML = `${opening}<br><b>${question.ko} · ${question.zh} · ${question.en}</b><br><span class="option-pinyin">${question.py}</span><br>${question.meaning}`;
+      feedbackEl.innerHTML = `${opening}<br><b>${question.correctKo} · ${question.correctZh} · ${question.correctEn}</b><br><span class="option-pinyin">${question.py}</span><br>${question.meaning}`;
       document.getElementById("answer-hint").textContent = correct ? "정답을 맞혔어요! 잘하고 있어요." : "해설을 읽고 다음 문제로 넘어가세요.";
       nextButton.textContent = current === ROUND_SIZE - 1 ? "결과 확인하기 →" : "다음 문제 →";
       nextButton.classList.remove("hidden");
@@ -624,14 +730,14 @@
       const question = questions[record.questionIndex];
       document.getElementById("question-number").textContent = String(current + 1).padStart(2, "0");
       document.getElementById("question-tag").textContent = question.day;
-      document.getElementById("question-text").textContent = record.pair.prompt;
+      document.getElementById("question-text").textContent = question[record.pair.promptKey];
       const sourceTerm = document.getElementById("source-term");
       sourceTerm.lang = record.pair.source;
-      sourceTerm.innerHTML = `<span>${question[record.pair.source]}</span>${record.pair.source === "zh" ? `<span class="source-pinyin">${question.py}</span>` : ""}`;
+      sourceTerm.innerHTML = `<span>${question[termFields[record.pair.source]]}</span>${record.pair.source === "zh" ? `<span class="source-pinyin">${question.py}</span>` : ""}`;
       progressTrack.setAttribute("aria-valuenow", String(current + 1));
       document.getElementById("progress-fill").style.width = `${(current + 1) / ROUND_SIZE * 100}%`;
       optionsEl.replaceChildren();
-      record.optionIndexes.forEach((optionIndex, index) => {
+      record.options.forEach((option, index) => {
         const button = document.createElement("button");
         button.className = "option";
         button.type = "button";
@@ -640,12 +746,12 @@
         const copy = button.lastElementChild;
         copy.lang = record.pair.target;
         const label = document.createElement("span");
-        label.textContent = questions[optionIndex][record.pair.target];
+        label.textContent = option[record.pair.target];
         copy.append(label);
         if (record.pair.target === "zh") {
           const pinyin = document.createElement("span");
           pinyin.className = "option-pinyin";
-          pinyin.textContent = questions[optionIndex].py;
+          pinyin.textContent = option.py;
           copy.append(pinyin);
         }
         if (index === record.correctAnswer) button.classList.add("correct");
@@ -655,7 +761,7 @@
       timerEl.textContent = "REVIEW";
       timerEl.classList.remove("warning");
       feedbackEl.className = "feedback visible";
-      feedbackEl.innerHTML = `${record.correct ? "<strong>내가 맞힌 문제</strong>" : "<strong>다시 확인해 보세요</strong>"}<br><b>${question.ko} · ${question.zh} · ${question.en}</b><br><span class="option-pinyin">${question.py}</span><br>${question.meaning}`;
+      feedbackEl.innerHTML = `${record.correct ? "<strong>내가 맞힌 문제</strong>" : "<strong>다시 확인해 보세요</strong>"}<br><b>${question.correctKo} · ${question.correctZh} · ${question.correctEn}</b><br><span class="option-pinyin">${question.py}</span><br>${question.meaning}`;
       document.getElementById("answer-hint").textContent = `${current + 1} / ${order.length} 정답 해설`;
       nextButton.textContent = current === order.length - 1 ? "결과로 돌아가기 →" : "다음 해설 →";
       nextButton.classList.remove("hidden");
@@ -664,6 +770,22 @@
 
     document.getElementById("start-button").addEventListener("click", startGame);
     document.getElementById("restart-button").addEventListener("click", startGame);
+    document.getElementById("home-nav").addEventListener("click", () => {
+      document.getElementById("home-page").classList.remove("hidden");
+      document.getElementById("about-page").classList.add("hidden");
+      document.getElementById("home-nav").classList.add("active");
+      document.getElementById("about-nav").classList.remove("active");
+      document.getElementById("home-nav").setAttribute("aria-current", "page");
+      document.getElementById("about-nav").removeAttribute("aria-current");
+    });
+    document.getElementById("about-nav").addEventListener("click", () => {
+      document.getElementById("home-page").classList.add("hidden");
+      document.getElementById("about-page").classList.remove("hidden");
+      document.getElementById("home-nav").classList.remove("active");
+      document.getElementById("about-nav").classList.add("active");
+      document.getElementById("about-nav").setAttribute("aria-current", "page");
+      document.getElementById("home-nav").removeAttribute("aria-current");
+    });
     nextButton.addEventListener("click", () => {
       if (reviewMode) {
         showReview();
