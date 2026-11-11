@@ -20,8 +20,10 @@ AX Mission 是一款无需安装依赖、打开浏览器即可游玩的 AI/IT �
 
 ```text
 AXMissionGame/
-├── index.html   # 游戏页面、样式和题库
-└── README.md    # 项目说明
+├── index.html   # 游戏页面结构与内容
+├── style.css    # 页面视觉样式和响应式布局
+├── app.js       # 67 道三语题库、答题逻辑与成绩保存
+└── README.md    # 项目说明与 GitHub Pages 部署步骤
 ```
 
 ## 如何运行
@@ -51,31 +53,24 @@ python -m http.server 8000
 | 检索增强生成 | Jian Suo Zeng Qiang Sheng Cheng | 검색 증강 생성 | Retrieval-Augmented Generation (RAG) | 参考检索到的资料来生成回答 |
 | AI智能体 | AIZhi Neng Ti | AI 에이전트 | AI Agent | 为实现目标而使用工具、执行多项任务的 AI 系统 |
 
-拼音采用参考教材中的无声调辅助标记。题库数据和出题设置可在 `index.html` 的 `questions` 数组中修改；每轮题数由 `ROUND_SIZE` 设置。每题分值为 10 分，修改每轮题数时请同时确认满分规则是否仍符合预期。
+拼音采用参考教材中的无声调辅助标记。题库数据位于 `app.js` 的 `vocabulary` 数组，题目会由词条自动生成；每轮题数由 `ROUND_SIZE` 设置。每题分值为 10 分，修改每轮题数时请同时确认满分规则是否仍符合预期。
 
 ## 题库数据结构
 
-每道题包含稳定编号、中韩文题干、三语正确答案、四个三语选项，以及从 0 开始的正确选项下标 `answerIndex`。题目还可带有分类、拼音和释义等辅助字段：
+`app.js` 中的每个词条包含分类、韩语、中文、拼音、英语和韩语释义。程序根据词条生成 4 个三语选项，并用从 0 开始的 `answerIndex` 标记正确选项：
 
 ```js
 {
-  id: 1,
-  questionZh: "请选择与「人工智能」对应的英文或韩文术语。",
-  questionKo: "「인공지능」에 해당하는 영어 또는 중국어 용어를 고르세요.",
-  correctEn: "Artificial Intelligence (AI)",
-  correctKo: "인공지능",
-  correctZh: "人工智能",
-  options: [
-    { en: "Artificial Intelligence (AI)", ko: "인공지능", zh: "人工智能" },
-    { en: "Generative AI", ko: "생성형 AI", zh: "生成式人工智能" },
-    { en: "Large Language Model (LLM)", ko: "대규모 언어 모델", zh: "大语言模型" },
-    { en: "Prompt", ko: "프롬프트", zh: "提示词" }
-  ],
-  answerIndex: 0
+  day: "DAY 08 · AI와 대화할 때",
+  ko: "인공지능",
+  zh: "人工智能",
+  py: "Ren Gong Zhi Neng",
+  en: "Artificial Intelligence (AI)",
+  meaning: "사람의 지능적인 일을 컴퓨터가 수행하도록 하는 기술"
 }
 ```
 
-当前题库由词汇基础资料生成，每题的四个选项及其 `answerIndex` 在初始化时一并构建；进入游戏后会随机排列选项显示顺序。
+出题时轮流显示中文、韩语或英语题干和来源词；选项会再次随机排列，确保正确答案位置不会固定。
 
 ## 部署到 GitHub Pages
 
@@ -85,7 +80,7 @@ python -m http.server 8000
 
 ```bash
 git init
-git add index.html README.md
+git add index.html style.css app.js README.md
 git commit -m "Add AX Mission vocabulary quiz"
 git branch -M main
 git remote add origin <你的 GitHub 仓库地址>
