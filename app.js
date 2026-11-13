@@ -375,12 +375,27 @@ function renderReviewQuestion() {
 document.getElementById("start-button").addEventListener("click", startGame);
 document.getElementById("restart-button").addEventListener("click", startGame);
 document.getElementById("home-nav").addEventListener("click", () => {
+  clearInterval(timerId);
+  order = [];
+  current = 0;
+  score = 0;
+  streak = 0;
+  bestStreak = 0;
+  answerHistory.length = 0;
+  reviewMode = false;
+  answered = false;
+  timerEl.textContent = "00:20";
+  timerEl.classList.remove("warning");
+  intro.classList.remove("hidden");
+  quiz.classList.add("hidden");
+  result.classList.add("hidden");
   document.getElementById("home-page").classList.remove("hidden");
   document.getElementById("about-page").classList.add("hidden");
   document.getElementById("home-nav").classList.add("active");
   document.getElementById("about-nav").classList.remove("active");
   document.getElementById("home-nav").setAttribute("aria-current", "page");
   document.getElementById("about-nav").removeAttribute("aria-current");
+  updateStats();
 });
 document.getElementById("about-nav").addEventListener("click", () => {
   document.getElementById("home-page").classList.add("hidden");
