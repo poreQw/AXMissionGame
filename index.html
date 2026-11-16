@@ -3,48 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f3f7fc">
-  <title>AX MISSION — 3개 국어 AI 용어 퀴즈</title>
+  <meta name="theme-color" content="#0b1420">
+  <meta id="page-description" name="description" content="AX QUEST v2.0 — AI·IT 용어를 익히고 XP, 레벨, 업적 배지를 모으는 삼국어 퀴즈">
+  <title>AX QUEST v2.0 — AI·IT 용어 퀴즈</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="app">
     <header class="topbar">
-      <div class="brand"><span class="brand-mark">A</span><span>AX MISSION <small> / FIELD TRAINING</small></span></div>
-      <nav class="page-nav" aria-label="页面导航">
-        <button id="home-nav" class="nav-link active" type="button" aria-current="page">开始游戏</button>
-        <button id="about-nav" class="nav-link" type="button">项目介绍</button>
+      <div class="brand"><span class="brand-mark">A</span><span>AX QUEST <small> / FIELD TRAINING v2.0</small></span></div>
+      <nav class="page-nav" aria-label="페이지 탐색" data-i18n-aria="pageNavLabel">
+        <button id="home-nav" class="nav-link active" type="button" aria-current="page" data-i18n="homeNav">홈</button>
+        <button id="about-nav" class="nav-link" type="button" data-i18n="aboutNav">소개</button>
+        <button id="settings-button" class="nav-link settings-link" type="button" aria-haspopup="dialog" aria-controls="settings-dialog"><span aria-hidden="true">⚙</span><span data-i18n="settingsNav">설정</span></button>
       </nav>
-      <div class="top-note">AI × IT KNOWLEDGE QUEST</div>
+      <div class="top-note" data-i18n="topNote">AI × IT · LEVEL UP YOUR KNOWLEDGE</div>
     </header>
 
     <main>
       <div id="home-page">
-      <section class="hero" aria-label="게임 소개">
+      <section class="hero" aria-label="게임 소개" data-i18n-aria="heroLabel">
         <div>
-          <div class="eyebrow">YOUR NEXT MISSION STARTS HERE</div>
-          <h1>AI·IT <span>퀴즈</span></h1>
-          <p>참고 자료의 AI 용어를 한국어·中文·English로 익혀 보세요.<br>병음과 뜻을 확인하며 10개의 미션에 도전합니다.</p>
+          <div class="eyebrow" data-i18n="heroEyebrow">YOUR NEXT MISSION STARTS HERE</div>
+          <h1>AX <span>QUEST</span></h1>
+          <p data-i18n="heroCopy">AI·IT 용어를 한국어·中文·English로 익히고 XP를 모아 레벨을 올려 보세요. 미션을 완료해 나만의 업적 배지를 수집하세요.</p>
         </div>
-        <div class="edition"><strong>MISSION 001</strong>AI & DIGITAL BASICS<br>난이도 · 입문부터 실전까지</div>
+        <div class="edition"><strong data-i18n="editionTitle">SEASON 01 · v2.0</strong><span data-i18n="editionLine">XP · LEVEL · BADGES</span><br><span data-i18n="editionCopy">10개 용어 미션에 도전하세요</span></div>
       </section>
 
       <div class="game-layout">
-        <section class="game-card" aria-label="퀴즈">
+        <section class="game-card" aria-label="퀴즈" data-i18n-aria="quizLabel">
           <div id="intro" class="intro">
             <div class="big-icon" aria-hidden="true">⌁</div>
-            <h2>지식 레벨을 확인할 시간!</h2>
-            <p>중국어와 병음을 보고 한국어를 고르거나, 한국어·영어 용어를 연결해 보세요. 문제마다 20초가 주어지며, 정답을 확인하면 세 언어 표현과 뜻을 볼 수 있어요.</p>
-            <div class="intro-meta"><span>◷ 문제당 20초</span><span>▦ 총 10개 용어</span><span>✦ 3개 언어 해설</span></div>
-            <button id="start-button" class="primary-btn" type="button" aria-controls="quiz">미션 시작하기 <span aria-hidden="true">→</span></button>
+            <h2 data-i18n="introTitle">퀘스트를 시작할 준비가 됐나요?</h2>
+            <p data-i18n="introCopy">10개 용어 미션에 도전하고 경험치를 쌓아 레벨을 올려 보세요. 정답과 빠른 답변은 더 많은 XP를 주며, 미션 기록에 따라 새로운 배지를 획득할 수 있어요.</p>
+            <div class="intro-meta"><span data-i18n="metaTimer">◷ 문제당 20초</span><span data-i18n="metaQuestions">▦ 미션당 10문제</span><span data-i18n="metaSpeed">✦ 정답 XP + 스피드 보너스</span><span data-i18n="metaPersistent">⚑ 영구 레벨 · 배지</span></div>
+            <button id="start-button" class="primary-btn" type="button" aria-controls="quiz"><span data-i18n="startButton">퀘스트 시작하기</span> <span aria-hidden="true">→</span></button>
           </div>
 
           <div id="quiz" class="hidden">
             <div class="card-head">
-              <div class="round-label">MISSION <b id="question-number">01</b><span> / 10</span></div>
+              <div class="round-label"><span data-i18n="missionLabel">MISSION</span> <b id="question-number">01</b><span data-i18n="questionTotal"> / 10</span></div>
               <div id="timer" class="timer" aria-live="off">00:20</div>
             </div>
-            <div class="progress-track" role="progressbar" aria-label="퀴즈 진행률" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0">
+            <div class="progress-track" role="progressbar" aria-label="퀴즈 진행률" data-i18n-aria="quizProgress" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0">
               <div id="progress-fill" class="progress-fill"></div>
             </div>
             <div class="question-content">
@@ -54,8 +56,8 @@
               <div id="options" class="options"></div>
               <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
               <div class="card-footer">
-                <span id="answer-hint" class="hint">가장 알맞은 답을 선택하세요</span>
-                <button id="next-button" class="primary-btn hidden">다음 문제 <span aria-hidden="true">→</span></button>
+                <span id="answer-hint" class="hint" data-i18n="answerHint">가장 알맞은 답을 선택하세요</span>
+                <button id="next-button" class="primary-btn hidden"><span id="next-button-label" data-i18n="nextQuestion">다음 문제</span> <span aria-hidden="true">→</span></button>
               </div>
             </div>
           </div>
@@ -65,87 +67,143 @@
             <div id="score-number" class="score-number">0</div>
             <h2 id="result-title">멋진 도전이었어요!</h2>
             <p id="result-detail" class="result-detail"></p>
-            <div class="result-stats" aria-label="이번 라운드 성적">
-              <div class="result-stat"><span>정답 수</span><strong id="result-correct">0 / 10</strong></div>
-              <div class="result-stat"><span>정답률</span><strong id="result-accuracy">0%</strong></div>
-              <div class="result-stat"><span>최고 연속 정답</span><strong id="result-streak">0</strong></div>
-              <div class="result-stat"><span>최고 점수</span><strong id="result-best-score">0</strong></div>
+            <div class="result-stats" aria-label="이번 라운드 성적" data-i18n-aria="resultStatsLabel">
+              <div class="result-stat"><span data-i18n="correctLabel">정답 수</span><strong id="result-correct">0 / 10</strong></div>
+              <div class="result-stat"><span data-i18n="accuracyLabel">정답률</span><strong id="result-accuracy">0%</strong></div>
+              <div class="result-stat"><span data-i18n="bestStreakLabel">최고 연속 정답</span><strong id="result-streak">0</strong></div>
+              <div class="result-stat"><span data-i18n="bestScoreLabel">최고 점수</span><strong id="result-best-score">0</strong></div>
             </div>
+            <section class="result-progression" aria-label="XP와 레벨 진행 상황" data-i18n-aria="resultProgressLabel">
+              <div class="result-xp"><span data-i18n="missionXp">이번 미션 XP</span><strong id="result-xp-earned">+0 XP</strong></div>
+              <div id="level-up-message" class="level-up-message hidden" role="status"></div>
+              <div class="result-level-row"><strong id="result-level-label">LEVEL 1</strong><span id="result-xp-progress-label">0 / 100 XP</span></div>
+              <div class="xp-progress-track" role="progressbar" aria-label="다음 레벨 진행률" data-i18n-aria="levelProgressLabel" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <div id="result-xp-progress-fill" class="xp-progress-fill"></div>
+              </div>
+              <div class="badge-section">
+                <div class="badge-heading"><strong data-i18n="questBadges">이번 퀘스트 배지</strong><span id="badge-count">0 / 5 획득</span></div>
+                <div id="badge-list" class="badge-list"></div>
+                <p id="new-badges-message" class="new-badges-message"></p>
+              </div>
+            </section>
             <div id="record-message" class="record-message" role="status" aria-live="polite"></div>
             <div class="result-actions">
-              <button id="restart-button" class="primary-btn">重新开始 · 다시 시작 <span aria-hidden="true">↻</span></button>
-              <button id="review-button" class="secondary-btn">정답 돌아보기</button>
+              <button id="restart-button" class="primary-btn"><span data-i18n="restartButton">다시 시작</span> <span aria-hidden="true">↻</span></button>
+              <button id="review-button" class="secondary-btn" data-i18n="reviewButton">정답 돌아보기</button>
             </div>
           </div>
         </section>
 
-        <aside class="side-card" aria-label="미션 현황">
-          <h2 class="side-title">MISSION STATUS</h2>
-          <p class="side-caption">이번 라운드의 기록</p>
-          <div class="stat"><span class="stat-label">현재 점수</span><span id="score-stat" class="stat-value lime">0<span style="font-size:11px;color:var(--muted)"> pt</span></span></div>
-          <div class="stat"><span class="stat-label">최고 점수 · 최고分</span><span id="best-score-stat" class="stat-value">0<span style="font-size:11px;color:var(--muted)"> pt</span></span></div>
-          <div class="stat"><span class="stat-label">정답</span><span id="correct-stat" class="stat-value">0<span style="font-size:11px;color:var(--muted)"> / 10</span></span></div>
-          <div class="stat"><span class="stat-label">연속 정답</span><span id="streak-stat" class="stat-value">0<span style="font-size:11px;color:var(--muted)"> 🔥</span></span></div>
-          <div class="mission-tip">
-            <span>FIELD TIP</span>
-            <p>용어의 뜻을 외우는 것보다, 어떤 문제를 해결하는 기술인지 이해하면 더 오래 기억할 수 있어요.</p>
+        <aside class="side-card" aria-label="퀘스트 현황" data-i18n-aria="profileLabel">
+          <h2 class="side-title" data-i18n="profileTitle">QUEST PROFILE</h2>
+          <p class="side-caption" data-i18n="profileCaption">나의 누적 성장 기록</p>
+          <div class="player-level">
+            <div class="player-level-top"><span class="player-level-icon" aria-hidden="true">◈</span><div><span class="player-level-caption" data-i18n="currentRank">CURRENT RANK</span><strong id="player-level">LEVEL 1</strong></div></div>
+            <div class="xp-progress-track" role="progressbar" aria-label="다음 레벨 진행률" data-i18n-aria="levelProgressLabel" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div id="player-xp-progress-fill" class="xp-progress-fill"></div>
+            </div>
+            <div class="player-xp-label"><span id="player-xp-total">0 XP TOTAL</span><span id="player-xp-progress">0 / 100 XP</span></div>
           </div>
-          <div id="storage-notice" class="storage-notice hidden" role="status">최고 점수를 이 브라우저에 저장할 수 없습니다.</div>
+          <div class="badge-summary"><span data-i18n="badgesEarned">획득 배지</span><strong id="player-badge-count">0 / 5</strong></div>
+          <div class="stat"><span class="stat-label" data-i18n="missionXp">이번 미션 XP</span><span id="xp-stat" class="stat-value lime">0<span> XP</span></span></div>
+          <h3 class="side-section-title" data-i18n="missionStatus">MISSION STATUS</h3>
+          <p class="side-caption round-caption" data-i18n="roundCaption">이번 라운드의 기록</p>
+          <div class="stat"><span class="stat-label" data-i18n="currentScore">현재 점수</span><span id="score-stat" class="stat-value lime">0<span> pt</span></span></div>
+          <div class="stat"><span class="stat-label" data-i18n="bestScoreLabel">최고 점수</span><span id="best-score-stat" class="stat-value">0<span> pt</span></span></div>
+          <div class="stat"><span class="stat-label" data-i18n="correctLabel">정답</span><span id="correct-stat" class="stat-value">0<span> / 10</span></span></div>
+          <div class="stat"><span class="stat-label" data-i18n="streakLabel">연속 정답</span><span id="streak-stat" class="stat-value">0<span> 🔥</span></span></div>
+          <div class="mission-tip">
+            <span data-i18n="fieldTip">FIELD TIP</span>
+            <p data-i18n="fieldTipCopy">용어의 뜻을 외우는 것보다, 어떤 문제를 해결하는 기술인지 이해하면 더 오래 기억할 수 있어요.</p>
+          </div>
+          <div id="storage-notice" class="storage-notice hidden" role="status" data-i18n="storageNotice">퀘스트 진행 상황을 이 브라우저에 저장할 수 없습니다.</div>
         </aside>
       </div>
-      <div class="footer-note">AX MISSION · 용어 출처: <a href="https://drplan.kr/AX_Study/AXTERM.html" target="_blank" rel="noopener noreferrer" style="color:inherit">BNC AX Junior Lab · 30일 IT 용어 마스터</a></div>
+      <section class="learning-history" aria-labelledby="history-title">
+        <div class="history-heading">
+          <div>
+            <div class="eyebrow" data-i18n="historyEyebrow">YOUR QUEST JOURNAL</div>
+            <h2 id="history-title" data-i18n="historyTitle">학습 기록</h2>
+            <p id="history-summary" class="history-summary" data-i18n="historySummaryEmpty">완료한 미션과 다시 볼 용어를 이 기기에 저장해요.</p>
+          </div>
+          <span class="history-retention" data-i18n="historyRetention">최근 10회 저장</span>
+        </div>
+        <p id="history-empty" class="history-empty" data-i18n="historyEmpty">첫 퀘스트를 완료하면 점수와 복습할 용어가 여기에 기록돼요.</p>
+        <div id="history-list" class="history-list" aria-live="polite"></div>
+      </section>
+      <div class="footer-note"><span data-i18n="footerPrefix">AX QUEST v2.0 · 용어 출처:</span> <a href="https://drplan.kr/AX_Study/AXTERM.html" target="_blank" rel="noopener noreferrer" style="color:inherit" data-i18n="footerLink">BNC AX Junior Lab · 30일 IT 용어 마스터</a></div>
       </div>
 
       <section id="about-page" class="about-page hidden" aria-labelledby="about-title">
-        <div class="eyebrow">ABOUT THIS PROJECT</div>
-        <h2 id="about-title">项目介绍</h2>
-        <p class="about-lead">AX Mission 是一款帮助学习者认识人工智能与信息技术词汇的三语问答小游戏。通过随机题目和即时反馈，轻松练习中文、英文与韩文术语。</p>
+        <div class="eyebrow" data-i18n="aboutEyebrow">ABOUT THIS PROJECT</div>
+        <h2 id="about-title" data-i18n="aboutTitle">项目介绍</h2>
+        <p class="about-lead" data-i18n="aboutLead">AX QUEST v2.0 是一款帮助学习者认识人工智能与信息技术词汇的三语问答小游戏。完成任务可获得 XP、提升等级并解锁专属徽章。</p>
         <div class="about-grid">
           <article class="about-card">
-            <h3>项目目的</h3>
-            <p>用简短、有互动感的游戏方式学习 AI 与 IT 术语，帮助玩家建立三种语言之间的词汇联系。</p>
+            <h3 data-i18n="aboutPurposeTitle">项目目的</h3>
+            <p data-i18n="aboutPurpose">用简短、有互动感的游戏方式学习 AI 与 IT 术语，帮助玩家建立三种语言之间的词汇联系。</p>
           </article>
           <article class="about-card">
-            <h3>适用对象</h3>
-            <p>适合对人工智能感兴趣的初学者、学习中文/英文/韩文的学生，以及希望轻松复习技术词汇的用户。</p>
+            <h3 data-i18n="aboutAudienceTitle">适用对象</h3>
+            <p data-i18n="aboutAudience">适合对人工智能感兴趣的初学者、学习中文/英文/韩文的学生，以及希望轻松复习技术词汇的用户。</p>
           </article>
           <article class="about-card">
-            <h3>游戏规则</h3>
+            <h3 data-i18n="aboutRulesTitle">游戏规则</h3>
             <ul>
-              <li>每轮从题库随机抽取 10 道不重复的题目。</li>
-              <li>每题有 4 个选项，限时 20 秒，每题只能作答一次。</li>
-              <li>答对得 10 分，答错或超时得 0 分，满分 100 分。</li>
+              <li data-i18n="aboutRule1">每轮从题库随机抽取 10 道不重复的题目。</li>
+              <li data-i18n="aboutRule2">每题有 4 个选项，限时 20 秒，每题只能作答一次。</li>
+              <li data-i18n="aboutRule3">答对得 10 分，答错或超时得 0 分，满分 100 分。有效作答可获得 XP，答对与快速作答有额外奖励。</li>
             </ul>
           </article>
           <article class="about-card">
-            <h3>主要功能</h3>
+            <h3 data-i18n="aboutFeaturesTitle">主要功能</h3>
             <ul>
-              <li>三语词汇练习、拼音辅助、即时正误反馈与答案回顾。</li>
-              <li>答题进度、得分、正确题数与连续答对纪录。</li>
-              <li>重新开始、响应式布局与浏览器最高分保存。</li>
+              <li data-i18n="aboutFeature1">三语词汇练习、拼音辅助、即时正误反馈与答案回顾。</li>
+              <li data-i18n="aboutFeature2">答题页显示进度和当前得分；结果页展示总分、XP、等级进度、升级提示与解锁徽章。</li>
+              <li data-i18n="aboutFeature3">累计 XP 提升等级；首个任务、70% 正确率、满分、五连对和累计 500 XP 可解锁徽章。</li>
+              <li data-i18n="aboutFeature4">最近 10 次已完成任务会保存成绩和错题词汇，方便之后复习。</li>
+              <li data-i18n="aboutFeature5">等级、XP、徽章、学习记录与最高分保存在当前浏览器，刷新后仍然保留。</li>
+              <li data-i18n="aboutFeature6">可在设置中切换韩语、简体中文和英语界面。</li>
             </ul>
           </article>
           <article class="about-card">
-            <h3>开发技术</h3>
-            <p>使用 HTML 搭建页面结构、CSS 实现视觉样式和响应式布局，使用原生 JavaScript 实现题库抽题、计时、计分和交互；使用 LocalStorage 保存最高分。无需安装依赖。</p>
+            <h3 data-i18n="aboutTechTitle">开发技术</h3>
+            <p data-i18n="aboutTech">使用 HTML 搭建页面结构、CSS 实现视觉样式和响应式布局，使用原生 JavaScript 实现题库抽题、计时、XP、等级和徽章；使用 LocalStorage 保存玩家进度、最近 10 次学习记录与最高分。无需安装依赖。</p>
           </article>
           <article class="about-card">
-            <h3>开发中遇到的问题</h3>
-            <p>需要保证随机抽题与选项均不重复、选项只有一个正确答案，并妥善处理超时和重复点击；同时还要兼顾不同屏幕尺寸与本地成绩保存。</p>
+            <h3 data-i18n="aboutChallengesTitle">开发中遇到的问题</h3>
+            <p data-i18n="aboutChallenges">需要保证随机抽题与选项均不重复、选项只有一个正确答案，并妥善处理超时和重复点击；同时还要兼顾不同屏幕尺寸与本地成绩保存。</p>
           </article>
           <article class="about-card">
-            <h3>学到的知识</h3>
-            <p>练习了用 JavaScript 管理游戏状态、打乱数组、控制计时器、更新 DOM、进行本地存储，以及使用 CSS Grid 和媒体查询构建移动端界面。</p>
+            <h3 data-i18n="aboutLearnedTitle">学到的知识</h3>
+            <p data-i18n="aboutLearned">练习了用 JavaScript 管理游戏状态、打乱数组、控制计时器、更新 DOM、进行本地存储，以及使用 CSS Grid 和媒体查询构建移动端界面。</p>
           </article>
           <article class="about-card">
-            <h3>界面截图占位</h3>
-            <div class="screenshot-placeholder">开始页 / 答题页截图<br>在此插入项目运行截图</div>
-            <div class="screenshot-placeholder">结果页 / 项目介绍页截图<br>在此插入项目运行截图</div>
+            <h3 data-i18n="aboutScreenshotsTitle">界面截图占位</h3>
+            <div class="screenshot-placeholder" data-i18n="screenshotPlaceholder1">开始页 / 答题页截图<br>在此插入项目运行截图</div>
+            <div class="screenshot-placeholder" data-i18n="screenshotPlaceholder2">结果页 / 项目介绍页截图<br>在此插入项目运行截图</div>
           </article>
         </div>
       </section>
     </main>
   </div>
+
+  <dialog id="settings-dialog" class="settings-dialog" aria-labelledby="settings-title">
+    <div class="settings-content">
+      <button id="settings-close-icon" class="settings-close-icon" type="button" aria-label="설정 닫기" data-i18n-aria="closeSettings">×</button>
+      <div class="eyebrow" data-i18n="settingsEyebrow">PREFERENCES</div>
+      <h2 id="settings-title" data-i18n="settingsTitle">설정</h2>
+      <p class="settings-copy" data-i18n="settingsCopy">화면에 표시할 언어를 선택하세요.</p>
+      <label for="language-select" data-i18n="languageLabel">표시 언어</label>
+      <select id="language-select">
+        <option value="ko">한국어</option>
+        <option value="zh">简体中文</option>
+        <option value="en">English</option>
+      </select>
+      <p class="settings-hint" data-i18n="languageHint">언어 설정은 이 브라우저에 자동 저장됩니다.</p>
+      <button id="settings-done" class="primary-btn settings-done" type="button" data-i18n="settingsDone">완료</button>
+    </div>
+  </dialog>
 
   <script src="app.js" defer></script>
 </body>
