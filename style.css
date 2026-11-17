@@ -323,8 +323,9 @@ h1 span { color: var(--violet); }
   .brand-mark { width: 32px; height: 32px; flex-basis: 32px; border-radius: 10px; font-size: 15px; }
   .brand small { font-size: 7px; }
   .page-nav { gap: 2px; padding: 3px; }
-  .nav-link { min-height: 34px; padding: 0 8px; font-size: 9px; }
+  .nav-link { min-height: 44px; padding: 0 8px; font-size: 9px; }
   .settings-link { display: flex; align-items: center; gap: 4px; }
+  .settings-close-icon { width: 44px; height: 44px; }
   main { padding: 27px 0 26px; }
   h1 { margin-top: 11px; font-size: 43px; }
   .hero { margin-bottom: 18px; }
