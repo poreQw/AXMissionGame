@@ -11,7 +11,7 @@
 <body>
   <div class="app">
     <header class="topbar">
-      <div class="brand"><span class="brand-mark">A</span><span>AX QUEST <small> / FIELD TRAINING v2.0</small></span></div>
+      <div class="brand"><button id="brand-home-button" class="brand-mark" type="button" aria-label="홈으로" data-i18n-aria="homeNav">A</button><span>AX QUEST <small> / FIELD TRAINING v2.0</small></span></div>
       <nav class="page-nav" aria-label="페이지 탐색" data-i18n-aria="pageNavLabel">
         <button id="home-nav" class="nav-link active" type="button" aria-current="page" data-i18n="homeNav">홈</button>
         <button id="about-nav" class="nav-link" type="button" data-i18n="aboutNav">소개</button>
@@ -34,11 +34,22 @@
       <div class="game-layout">
         <section class="game-card" aria-label="퀴즈" data-i18n-aria="quizLabel">
           <div id="intro" class="intro">
-            <div class="big-icon" aria-hidden="true">⌁</div>
-            <h2 data-i18n="introTitle">퀘스트를 시작할 준비가 됐나요?</h2>
-            <p data-i18n="introCopy">10개 용어 미션에 도전하고 경험치를 쌓아 레벨을 올려 보세요. 정답과 빠른 답변은 더 많은 XP를 주며, 미션 기록에 따라 새로운 배지를 획득할 수 있어요.</p>
-            <div class="intro-meta"><span data-i18n="metaTimer">◷ 문제당 20초</span><span data-i18n="metaQuestions">▦ 미션당 10문제</span><span data-i18n="metaSpeed">✦ 정답 XP + 스피드 보너스</span><span data-i18n="metaPersistent">⚑ 영구 레벨 · 배지</span></div>
-            <button id="start-button" class="primary-btn" type="button" aria-controls="quiz"><span data-i18n="startButton">퀘스트 시작하기</span> <span aria-hidden="true">→</span></button>
+            <div class="intro-stage" aria-label="任务开始界面">
+              <div class="orbit-ring ring-outer" aria-hidden="true"></div>
+              <div class="orbit-ring ring-inner" aria-hidden="true"></div>
+
+              <div class="orbit-info info-top"><span>▦</span><strong data-i18n="orbitQuestions">每轮 10 题</strong></div>
+              <div class="orbit-info info-bottom"><span>⚑</span><strong data-i18n="orbitBadges">成就徽章系统</strong></div>
+              <div class="orbit-info info-left-top"><span>◷</span><strong data-i18n="orbitTimer">每题限时 20 秒</strong></div>
+              <div class="orbit-info info-left-bottom"><span>✦</span><strong data-i18n="orbitXp">答对获得 XP</strong></div>
+              <div class="orbit-info info-right-top"><span>⚡</span><strong data-i18n="orbitSpeed">快速答题奖励</strong></div>
+              <div class="orbit-info info-right-bottom"><span>LV</span><strong data-i18n="orbitLevel">永久等级系统</strong></div>
+
+              <button id="start-button" class="primary-btn" type="button" aria-controls="quiz">
+                <span data-i18n="startButton">开始任务</span>
+                <span class="start-arrow" aria-hidden="true">→</span>
+              </button>
+            </div>
           </div>
 
           <div id="quiz" class="hidden">
@@ -94,7 +105,7 @@
           </div>
         </section>
 
-        <aside class="side-card" aria-label="퀘스트 현황" data-i18n-aria="profileLabel">
+        <aside class="side-card standalone-source hidden" aria-label="퀘스트 현황" data-i18n-aria="profileLabel">
           <h2 class="side-title" data-i18n="profileTitle">QUEST PROFILE</h2>
           <p class="side-caption" data-i18n="profileCaption">나의 누적 성장 기록</p>
           <div class="player-level">
@@ -119,7 +130,7 @@
           <div id="storage-notice" class="storage-notice hidden" role="status" data-i18n="storageNotice">퀘스트 진행 상황을 이 브라우저에 저장할 수 없습니다.</div>
         </aside>
       </div>
-      <section class="learning-history" aria-labelledby="history-title">
+      <section class="learning-history standalone-source hidden" aria-labelledby="history-title">
         <div class="history-heading">
           <div>
             <div class="eyebrow" data-i18n="historyEyebrow">YOUR QUEST JOURNAL</div>
@@ -188,6 +199,29 @@
     </main>
   </div>
 
+  <aside class="side-panel-rail" aria-label="右侧信息面板">
+    <button id="profile-rail-button" class="side-panel-button" type="button" aria-haspopup="dialog" aria-controls="profile-dialog">
+      <span aria-hidden="true">◈</span><strong data-i18n="profileNav">档案</strong>
+    </button>
+    <button id="history-rail-button" class="side-panel-button" type="button" aria-haspopup="dialog" aria-controls="history-dialog">
+      <span aria-hidden="true">▤</span><strong data-i18n="historyTitle">学习记录</strong>
+    </button>
+  </aside>
+
+  <dialog id="profile-dialog" class="profile-dialog" aria-label="퀘스트 프로필" data-i18n-aria="profileTitle">
+    <div class="profile-dialog-content">
+      <button id="profile-close-icon" class="settings-close-icon" type="button" aria-label="프로필 닫기" data-i18n-aria="closeProfile">×</button>
+      <div id="profile-dialog-content"></div>
+    </div>
+  </dialog>
+
+  <dialog id="history-dialog" class="history-dialog" aria-labelledby="history-dialog-title">
+    <div class="history-dialog-content">
+      <button id="history-close-icon" class="settings-close-icon" type="button" aria-label="关闭学习记录">×</button>
+      <div id="history-dialog-title" class="history-dialog-snapshot"></div>
+    </div>
+  </dialog>
+
   <dialog id="settings-dialog" class="settings-dialog" aria-labelledby="settings-title">
     <div class="settings-content">
       <button id="settings-close-icon" class="settings-close-icon" type="button" aria-label="설정 닫기" data-i18n-aria="closeSettings">×</button>
@@ -201,6 +235,29 @@
         <option value="en">English</option>
       </select>
       <p class="settings-hint" data-i18n="languageHint">언어 설정은 이 브라우저에 자동 저장됩니다.</p>
+      <label for="display-mode-select" data-i18n="displayModeLabel">设备显示模式</label>
+      <select id="display-mode-select">
+        <option value="auto" data-i18n="displayModeAuto">Auto · 自动适配</option>
+        <option value="desktop" data-i18n="displayModeDesktop">Desktop · 电脑端</option>
+        <option value="mobile" data-i18n="displayModeMobile">Mobile · 手机端</option>
+      </select>
+      <p class="settings-hint" data-i18n="displayModeHint">显示模式只调整布局，不会限制其他设备上的正常使用。</p>
+      <label for="animation-select" data-i18n="animationLabel">动画效果</label>
+      <select id="animation-select">
+        <option value="on" data-i18n="enabledOption">开启</option>
+        <option value="off" data-i18n="disabledOption">关闭</option>
+      </select>
+      <label for="ui-scale-select" data-i18n="uiScaleLabel">界面大小</label>
+      <select id="ui-scale-select">
+        <option value="0.9" data-i18n="uiScaleSmall">较小 · 90%</option>
+        <option value="1" data-i18n="uiScaleNormal">标准 · 100%</option>
+        <option value="1.1" data-i18n="uiScaleLarge">较大 · 110%</option>
+      </select>
+      <p class="settings-hint" data-i18n="uiScaleHint">偏好设置会保存在此浏览器。</p>
+      <div class="settings-planned" role="note">
+        <span data-i18n="plannedFeaturesTitle">后续阶段计划</span>
+        <p data-i18n="plannedFeaturesCopy">猫头鹰互动将在第二阶段开发，音效将在第三阶段开发；目前尚未启用。</p>
+      </div>
       <button id="settings-done" class="primary-btn settings-done" type="button" data-i18n="settingsDone">완료</button>
     </div>
   </dialog>

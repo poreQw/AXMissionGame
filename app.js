@@ -112,11 +112,13 @@ const badges = [
   { id: "xp-pioneer", icon: "◆", name: "xpBadge", description: "xpBadgeDescription" }
 ];
 const LANGUAGE_KEY = "axQuestLanguage";
+const UI_SETTINGS_KEY = "axQuestUiSettings";
+const uiSettings = { displayMode: "auto", animations: "on", scale: "1" };
 const translations = {
   ko: {
     pageTitle: "AX QUEST v2.0 — AI·IT 용어 퀴즈",
     pageDescription: "AI·IT 용어를 익히고 XP, 레벨, 업적 배지를 모으는 삼국어 퀴즈",
-    pageNavLabel: "페이지 탐색", homeNav: "홈", aboutNav: "소개", settingsNav: "설정",
+    pageNavLabel: "페이지 탐색", homeNav: "홈", aboutNav: "소개", profileNav: "프로필", closeProfile: "프로필 닫기", settingsNav: "설정",
     topNote: "AI × IT · 지식을 레벨업하세요", heroLabel: "게임 소개",
     heroEyebrow: "YOUR NEXT MISSION STARTS HERE",
     heroCopy: "AI·IT 용어를 한국어·中文·English로 익히고 XP를 모아 레벨을 올려 보세요. 미션을 완료해 나만의 업적 배지를 수집하세요.",
@@ -124,7 +126,11 @@ const translations = {
     quizLabel: "퀴즈", introTitle: "퀘스트를 시작할 준비가 됐나요?",
     introCopy: "10개 용어 미션에 도전하고 경험치를 쌓아 레벨을 올려 보세요. 정답과 빠른 답변은 더 많은 XP를 주며, 미션 기록에 따라 새로운 배지를 획득할 수 있어요.",
     metaTimer: "◷ 문제당 20초", metaQuestions: "▦ 미션당 10문제", metaSpeed: "✦ 정답 XP + 스피드 보너스",
-    metaPersistent: "⚑ 영구 레벨 · 배지", startButton: "퀘스트 시작하기", missionLabel: "MISSION",
+    metaPersistent: "⚑ 영구 레벨 · 배지",
+    orbitQuestions: "▦ 미션당 10문제", orbitBadges: "⚑ 영구 배지 시스템",
+    orbitTimer: "◷ 문제당 20초", orbitXp: "✦ 정답 XP 획득",
+    orbitSpeed: "⚡ 빠른 답변 보너스", orbitLevel: "LV 영구 레벨 시스템",
+    startButton: "퀘스트 시작하기", missionLabel: "MISSION",
     questionTotal: " / 10", quizProgress: "퀴즈 진행률", answerHint: "가장 알맞은 답을 선택하세요",
     nextQuestion: "다음 문제", showResults: "결과 보기", nextReview: "다음 해설", returnResults: "결과로 돌아가기",
     resultStatsLabel: "이번 라운드 성적", correctLabel: "정답 수", accuracyLabel: "정답률",
@@ -138,7 +144,7 @@ const translations = {
     roundCaption: "이번 라운드의 기록", currentScore: "현재 점수", streakLabel: "연속 정답",
     pointsUnit: "pt", fieldTip: "FIELD TIP",
     fieldTipCopy: "용어의 뜻을 외우는 것보다, 어떤 문제를 해결하는 기술인지 이해하면 더 오래 기억할 수 있어요.",
-    storageNotice: "퀘스트 진행 상황을 이 브라우저에 저장할 수 없습니다.",
+    storageNotice: "이 브라우저에서 진행 상황이나 설정을 저장할 수 없습니다.",
     historyEyebrow: "YOUR QUEST JOURNAL", historyTitle: "학습 기록",
     historySummaryEmpty: "완료한 미션과 다시 볼 용어를 이 기기에 저장해요.",
     historySummary: "누적 {missions}회 완료 · 최근 {count}회 기록",
@@ -161,7 +167,7 @@ const translations = {
     aboutFeature3: "첫 미션, 7문제 정답, 만점, 5연속 정답, XP 500 달성 배지",
     aboutFeature4: "최근 완료한 미션 10회와 복습할 오답 용어 저장",
     aboutFeature5: "XP, 레벨, 배지와 학습 기록을 이 브라우저에 저장",
-    aboutFeature6: "설정에서 한국어·简体中文·English 화면 언어 선택",
+    aboutFeature6: "설정에서 화면 언어·기기 표시 모드·UI 크기·애니메이션을 변경하고 저장",
     aboutTechTitle: "사용 기술",
     aboutTech: "HTML, CSS, 순수 JavaScript와 LocalStorage로 구현했습니다. 별도 설치 없이 실행할 수 있습니다.",
     aboutChallengesTitle: "개발 중 고민",
@@ -171,8 +177,17 @@ const translations = {
     aboutScreenshotsTitle: "화면 미리보기", screenshotPlaceholder1: "시작 화면 · 퀴즈 화면 미리보기",
     screenshotPlaceholder2: "결과 화면 · 프로젝트 소개 미리보기",
     settingsEyebrow: "PREFERENCES", settingsTitle: "설정",
-    settingsCopy: "화면에 표시할 언어를 선택하세요.", languageLabel: "표시 언어",
-    languageHint: "언어 설정은 이 브라우저에 자동 저장됩니다.", settingsDone: "완료", closeSettings: "설정 닫기",
+    settingsCopy: "화면 언어와 기기별 레이아웃을 설정하세요.", languageLabel: "표시 언어",
+    languageHint: "언어 설정은 이 브라우저에 자동 저장됩니다.",
+    displayModeLabel: "기기 표시 모드", displayModeAuto: "Auto · 자동 맞춤",
+    displayModeDesktop: "Desktop · 데스크톱", displayModeMobile: "Mobile · 모바일",
+    displayModeHint: "표시 모드는 레이아웃만 조정하며 다른 기기의 사용을 제한하지 않습니다.",
+    animationLabel: "애니메이션", enabledOption: "켜기", disabledOption: "끄기",
+    uiScaleLabel: "UI 크기", uiScaleSmall: "작게 · 90%", uiScaleNormal: "표준 · 100%",
+    uiScaleLarge: "크게 · 110%", uiScaleHint: "환경설정은 이 브라우저에 저장됩니다.",
+    plannedFeaturesTitle: "후속 단계 계획",
+    plannedFeaturesCopy: "부엉이 상호작용은 2단계, 효과음은 3단계에서 개발할 예정이며 아직 사용할 수 없습니다.",
+    settingsDone: "완료", closeSettings: "설정 닫기",
     feedbackTimeout: "<strong>시간 초과!</strong> 정답은 {letter} · {answer}예요.",
     feedbackCorrect: "<strong>정답이에요!</strong> 정확하게 알고 있네요.",
     feedbackIncorrect: "<strong>아쉬워요!</strong> 정답은 {letter} · {answer}예요.",
@@ -197,7 +212,7 @@ const translations = {
   zh: {
     pageTitle: "AX QUEST v2.0 — AI·IT 词汇问答",
     pageDescription: "学习 AI·IT 词汇，赚取 XP、升级并收集成就徽章",
-    pageNavLabel: "页面导航", homeNav: "首页", aboutNav: "介绍", settingsNav: "设置",
+    pageNavLabel: "页面导航", homeNav: "首页", aboutNav: "介绍", profileNav: "档案", closeProfile: "关闭档案", settingsNav: "设置",
     topNote: "AI × IT · 知识升级", heroLabel: "游戏介绍",
     heroEyebrow: "下一场任务，即刻开启",
     heroCopy: "用韩语、中文和英语学习 AI·IT 词汇，赚取 XP 并提升等级。完成任务，收集专属成就徽章。",
@@ -205,7 +220,11 @@ const translations = {
     quizLabel: "答题", introTitle: "准备好开始任务了吗？",
     introCopy: "挑战 10 道词汇题，积累经验并提升等级。答对和快速作答可获得更多 XP，还能根据任务表现解锁徽章。",
     metaTimer: "◷ 每题 20 秒", metaQuestions: "▦ 每轮 10 题", metaSpeed: "✦ 答对 XP + 速度奖励",
-    metaPersistent: "⚑ 永久等级 · 徽章", startButton: "开始任务", missionLabel: "任务",
+    metaPersistent: "⚑ 永久等级 · 徽章",
+    orbitQuestions: "▦ 每轮 10 题", orbitBadges: "⚑ 成就徽章系统",
+    orbitTimer: "◷ 每题限时 20 秒", orbitXp: "✦ 答对获得 XP",
+    orbitSpeed: "⚡ 快速答题奖励", orbitLevel: "LV 永久等级系统",
+    startButton: "开始任务", missionLabel: "任务",
     questionTotal: " / 10", quizProgress: "答题进度", answerHint: "请选择最合适的答案",
     nextQuestion: "下一题", showResults: "查看结果", nextReview: "下一题解析", returnResults: "返回结果",
     resultStatsLabel: "本轮成绩", correctLabel: "答对题数", accuracyLabel: "正确率",
@@ -219,7 +238,7 @@ const translations = {
     roundCaption: "当前任务记录", currentScore: "当前得分", streakLabel: "连续答对",
     pointsUnit: "分", fieldTip: "任务提示",
     fieldTipCopy: "理解一项技术解决什么问题，比单纯记住术语更容易留下印象。",
-    storageNotice: "无法在此浏览器中保存任务进度。",
+    storageNotice: "此浏览器无法保存任务进度或设置。",
     historyEyebrow: "任务日志", historyTitle: "学习记录",
     historySummaryEmpty: "已完成任务与待复习词汇会保存在此设备上。",
     historySummary: "累计完成 {missions} 轮 · 保存最近 {count} 轮",
@@ -242,7 +261,7 @@ const translations = {
     aboutFeature3: "完成首个任务、单轮答对 7 题、满分、五连对和累计 500 XP 可获徽章",
     aboutFeature4: "保存最近 10 次任务成绩和待复习错题",
     aboutFeature5: "XP、等级、徽章和学习记录保存在当前浏览器",
-    aboutFeature6: "可在设置中切换韩语、简体中文和英语界面",
+    aboutFeature6: "可在设置中调整并保存界面语言、设备显示模式、UI 大小和动画",
     aboutTechTitle: "开发技术",
     aboutTech: "使用 HTML、CSS、原生 JavaScript 和 LocalStorage 开发，无需安装依赖。",
     aboutChallengesTitle: "开发中的问题",
@@ -252,8 +271,17 @@ const translations = {
     aboutScreenshotsTitle: "界面预览", screenshotPlaceholder1: "开始页 · 答题页预览",
     screenshotPlaceholder2: "结果页 · 项目介绍页预览",
     settingsEyebrow: "偏好设置", settingsTitle: "设置",
-    settingsCopy: "选择界面显示语言。", languageLabel: "显示语言",
-    languageHint: "语言选择会自动保存在此浏览器。", settingsDone: "完成", closeSettings: "关闭设置",
+    settingsCopy: "设置界面语言和设备布局偏好。", languageLabel: "显示语言",
+    languageHint: "语言选择会自动保存在此浏览器。",
+    displayModeLabel: "设备显示模式", displayModeAuto: "Auto · 自动适配",
+    displayModeDesktop: "Desktop · 电脑端", displayModeMobile: "Mobile · 手机端",
+    displayModeHint: "显示模式只调整布局，不会限制其他设备上的正常使用。",
+    animationLabel: "动画效果", enabledOption: "开启", disabledOption: "关闭",
+    uiScaleLabel: "界面大小", uiScaleSmall: "较小 · 90%", uiScaleNormal: "标准 · 100%",
+    uiScaleLarge: "较大 · 110%", uiScaleHint: "偏好设置会保存在此浏览器。",
+    plannedFeaturesTitle: "后续阶段计划",
+    plannedFeaturesCopy: "猫头鹰互动将在第二阶段开发，音效将在第三阶段开发；目前尚未启用。",
+    settingsDone: "完成", closeSettings: "关闭设置",
     feedbackTimeout: "<strong>时间到！</strong> 正确答案是 {letter} · {answer}。",
     feedbackCorrect: "<strong>答对了！</strong> 回答正确。",
     feedbackIncorrect: "<strong>差一点！</strong> 正确答案是 {letter} · {answer}。",
@@ -278,7 +306,7 @@ const translations = {
   en: {
     pageTitle: "AX QUEST v2.0 — AI & IT Vocabulary Quest",
     pageDescription: "Learn AI and IT vocabulary, earn XP, level up, and collect achievement badges",
-    pageNavLabel: "Page navigation", homeNav: "Home", aboutNav: "About", settingsNav: "Settings",
+    pageNavLabel: "Page navigation", homeNav: "Home", aboutNav: "About", profileNav: "Profile", closeProfile: "Close profile", settingsNav: "Settings",
     topNote: "AI × IT · LEVEL UP YOUR KNOWLEDGE", heroLabel: "Game introduction",
     heroEyebrow: "YOUR NEXT MISSION STARTS HERE",
     heroCopy: "Learn AI and IT terms in Korean, Chinese, and English. Earn XP, level up, and collect achievement badges.",
@@ -287,6 +315,9 @@ const translations = {
     introCopy: "Take on 10 vocabulary questions and earn XP to level up. Correct and fast answers give bonus XP, and mission results unlock badges.",
     metaTimer: "◷ 20 seconds per question", metaQuestions: "▦ 10 questions per quest",
     metaSpeed: "✦ Correct-answer XP + speed bonus", metaPersistent: "⚑ Persistent levels · badges",
+    orbitQuestions: "▦ 10 questions per quest", orbitBadges: "⚑ Achievement badge system",
+    orbitTimer: "◷ 20 seconds per question", orbitXp: "✦ Earn XP for correct answers",
+    orbitSpeed: "⚡ Fast-answer reward", orbitLevel: "LV Permanent level system",
     startButton: "Start quest", missionLabel: "MISSION", questionTotal: " / 10",
     quizProgress: "Quiz progress", answerHint: "Choose the best answer",
     nextQuestion: "Next question", showResults: "View results", nextReview: "Next explanation",
@@ -303,7 +334,7 @@ const translations = {
     currentScore: "Current score", streakLabel: "Current streak", pointsUnit: "pt",
     fieldTip: "FIELD TIP",
     fieldTipCopy: "Understanding the problem a technology solves makes its terminology easier to remember.",
-    storageNotice: "Quest progress could not be saved in this browser.",
+    storageNotice: "Quest progress or settings could not be saved in this browser.",
     historyEyebrow: "YOUR QUEST JOURNAL", historyTitle: "Learning history",
     historySummaryEmpty: "Completed quests and terms to review are saved on this device.",
     historySummary: "{missions} quests completed · Showing the latest {count}",
@@ -327,7 +358,7 @@ const translations = {
     aboutFeature3: "Badges for your first quest, 7 correct, a perfect round, a five-answer streak, and 500 total XP",
     aboutFeature4: "Stores scores and terms to review from your 10 most recent quests",
     aboutFeature5: "XP, levels, badges, and learning history saved in this browser",
-    aboutFeature6: "Switch between Korean, Simplified Chinese, and English in Settings",
+    aboutFeature6: "Adjust and save the interface language, device layout, UI size, and animations in Settings",
     aboutTechTitle: "Built with",
     aboutTech: "Built with HTML, CSS, vanilla JavaScript, and LocalStorage. No dependencies required.",
     aboutChallengesTitle: "Challenges",
@@ -337,9 +368,17 @@ const translations = {
     aboutScreenshotsTitle: "Screen previews", screenshotPlaceholder1: "Home · Quiz screen preview",
     screenshotPlaceholder2: "Results · Project overview preview",
     settingsEyebrow: "PREFERENCES", settingsTitle: "Settings",
-    settingsCopy: "Choose the language used across the interface.", languageLabel: "Display language",
-    languageHint: "Your language choice is saved in this browser.", settingsDone: "Done",
-    closeSettings: "Close settings",
+    settingsCopy: "Choose your interface language and device layout preferences.", languageLabel: "Display language",
+    languageHint: "Your language choice is saved in this browser.",
+    displayModeLabel: "Device display mode", displayModeAuto: "Auto · Fit automatically",
+    displayModeDesktop: "Desktop", displayModeMobile: "Mobile",
+    displayModeHint: "This changes the layout only and does not prevent use on other devices.",
+    animationLabel: "Animations", enabledOption: "On", disabledOption: "Off",
+    uiScaleLabel: "Interface size", uiScaleSmall: "Small · 90%", uiScaleNormal: "Default · 100%",
+    uiScaleLarge: "Large · 110%", uiScaleHint: "Preferences are saved in this browser.",
+    plannedFeaturesTitle: "Planned for later phases",
+    plannedFeaturesCopy: "Owl interactions are planned for phase 2 and sound effects for phase 3; neither is enabled yet.",
+    settingsDone: "Done", closeSettings: "Close settings",
     feedbackTimeout: "<strong>Time's up!</strong> The correct answer is {letter} · {answer}.",
     feedbackCorrect: "<strong>Correct!</strong> Nicely done.",
     feedbackIncorrect: "<strong>Not quite.</strong> The correct answer is {letter} · {answer}.",
@@ -387,7 +426,7 @@ let roundCompleted = false;
 let newBadges = [];
 const profile = { xp: 0, missions: 0, badges: [], history: [] };
 const answerHistory = [];
-let currentLanguage = "ko";
+let currentLanguage = "zh";
 let lastResult = null;
 
 const intro = document.getElementById("intro");
@@ -423,6 +462,59 @@ function loadLanguagePreference() {
   } catch {
     showStorageNotice();
   }
+}
+
+function applyUiSettings() {
+  const root = document.documentElement;
+  root.dataset.displayMode = uiSettings.displayMode;
+  root.dataset.animations = uiSettings.animations;
+  root.style.setProperty("--ui-scale", uiSettings.scale);
+  document.getElementById("display-mode-select").value = uiSettings.displayMode;
+  document.getElementById("animation-select").value = uiSettings.animations;
+  document.getElementById("ui-scale-select").value = uiSettings.scale;
+}
+
+function loadUiSettings() {
+  try {
+    const savedSettings = localStorage.getItem(UI_SETTINGS_KEY);
+    if (!savedSettings) return;
+    const parsedSettings = JSON.parse(savedSettings);
+    if (!parsedSettings || typeof parsedSettings !== "object" || Array.isArray(parsedSettings)) {
+      showStorageNotice();
+      return;
+    }
+    if (["auto", "desktop", "mobile"].includes(parsedSettings.displayMode)) {
+      uiSettings.displayMode = parsedSettings.displayMode;
+    }
+    if (["on", "off"].includes(parsedSettings.animations)) {
+      uiSettings.animations = parsedSettings.animations;
+    }
+    if (["0.9", "1", "1.1"].includes(String(parsedSettings.scale))) {
+      uiSettings.scale = String(parsedSettings.scale);
+    }
+  } catch {
+    showStorageNotice();
+  }
+}
+
+function saveUiSettings() {
+  try {
+    localStorage.setItem(UI_SETTINGS_KEY, JSON.stringify(uiSettings));
+  } catch {
+    showStorageNotice();
+  }
+}
+
+function updateUiSetting(setting, value) {
+  const allowedValues = {
+    displayMode: ["auto", "desktop", "mobile"],
+    animations: ["on", "off"],
+    scale: ["0.9", "1", "1.1"]
+  };
+  if (!allowedValues[setting].includes(value)) return;
+  uiSettings[setting] = value;
+  applyUiSettings();
+  saveUiSettings();
 }
 
 function applyLanguage() {
@@ -970,6 +1062,16 @@ function renderReviewQuestion(shouldFocus = true) {
 // 页面事件入口：开始/重开、导航、答题后继续和答案回顾。
 document.getElementById("start-button").addEventListener("click", startGame);
 document.getElementById("restart-button").addEventListener("click", startGame);
+const introStage = document.querySelector(".intro-stage");
+if (introStage) {
+  introStage.addEventListener("pointerenter", () => {
+    if (window.matchMedia("(hover: none)").matches) introStage.classList.add("revealed");
+  });
+  introStage.addEventListener("pointerleave", () => {
+    if (window.matchMedia("(hover: none)").matches) introStage.classList.remove("revealed");
+  });
+}
+document.getElementById("brand-home-button").addEventListener("click", () => document.getElementById("home-nav").click());
 document.getElementById("home-nav").addEventListener("click", () => {
   clearInterval(timerId);
   order = [];
@@ -1004,6 +1106,53 @@ document.getElementById("about-nav").addEventListener("click", () => {
   document.getElementById("about-nav").setAttribute("aria-current", "page");
   document.getElementById("home-nav").removeAttribute("aria-current");
 });
+const profileDialog = document.getElementById("profile-dialog");
+const profileDialogContent = document.getElementById("profile-dialog-content");
+function closeBookDialog(dialog) {
+  if (!dialog.open || dialog.classList.contains("book-close")) return;
+  dialog.classList.remove("book-open");
+  dialog.classList.add("book-close");
+  window.setTimeout(() => {
+    dialog.close();
+    dialog.classList.remove("book-close");
+  }, 340);
+}
+document.getElementById("profile-close-icon").addEventListener("click", () => closeBookDialog(profileDialog));
+profileDialog.addEventListener("click", event => {
+  if (event.target === profileDialog) closeBookDialog(profileDialog);
+});
+profileDialog.addEventListener("cancel", event => {
+  event.preventDefault();
+  closeBookDialog(profileDialog);
+});
+const historyDialog = document.getElementById("history-dialog");
+const historyDialogTitle = document.getElementById("history-dialog-title");
+document.getElementById("profile-rail-button").addEventListener("click", () => {
+  const profileSnapshot = document.querySelector(".side-card").cloneNode(true);
+  profileSnapshot.querySelectorAll("[id]").forEach(element => element.removeAttribute("id"));
+  profileSnapshot.classList.remove("standalone-source", "hidden");
+  profileDialogContent.replaceChildren(profileSnapshot);
+  profileDialog.showModal();
+  profileDialog.classList.remove("book-close");
+  profileDialog.classList.add("book-open");
+});
+document.getElementById("history-rail-button").addEventListener("click", () => {
+  const historySnapshot = document.querySelector(".learning-history").cloneNode(true);
+  historySnapshot.querySelectorAll("[id]").forEach(element => element.removeAttribute("id"));
+  historySnapshot.classList.remove("standalone-source", "hidden");
+  historyDialogTitle.replaceChildren(historySnapshot);
+  historyDialog.showModal();
+  historyDialog.classList.remove("book-close");
+  historyDialog.classList.add("book-open");
+});
+document.getElementById("history-close-icon").addEventListener("click", () => closeBookDialog(historyDialog));
+historyDialog.addEventListener("click", event => {
+  if (event.target === historyDialog) closeBookDialog(historyDialog);
+});
+historyDialog.addEventListener("cancel", event => {
+  event.preventDefault();
+  closeBookDialog(historyDialog);
+});
 nextButton.addEventListener("click", () => {
   if (reviewMode) {
     showReview();
@@ -1022,6 +1171,15 @@ document.getElementById("settings-button").addEventListener("click", () => {
 document.getElementById("language-select").addEventListener("change", event => {
   setLanguage(event.target.value);
 });
+document.getElementById("display-mode-select").addEventListener("change", event => {
+  updateUiSetting("displayMode", event.target.value);
+});
+document.getElementById("animation-select").addEventListener("change", event => {
+  updateUiSetting("animations", event.target.value);
+});
+document.getElementById("ui-scale-select").addEventListener("change", event => {
+  updateUiSetting("scale", event.target.value);
+});
 document.getElementById("settings-close-icon").addEventListener("click", () => settingsDialog.close());
 document.getElementById("settings-done").addEventListener("click", () => settingsDialog.close());
 settingsDialog.addEventListener("click", event => {
@@ -1030,4 +1188,6 @@ settingsDialog.addEventListener("click", event => {
 loadBestScore();
 loadProfile();
 loadLanguagePreference();
+loadUiSettings();
+applyUiSettings();
 applyLanguage();
